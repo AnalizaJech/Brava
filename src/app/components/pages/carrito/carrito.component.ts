@@ -29,10 +29,20 @@ export class CarritoComponent implements OnInit {
   }
 
   actualizarCantidad(id: number, cantidad: number): void {
+    const item = this.cart.find(p => p.id_producto === id);
+    if (!item) return;
+  
     if (cantidad < 1) return;
+  
+    if (cantidad > item.stock) {
+      alert(`❌ No hay suficiente stock para "${item.nom_producto}". Stock disponible: ${item.stock}`);
+      return;
+    }
+  
     this.cartService.updateQuantity(id, cantidad);
     this.cart = this.cartService.getCart();
   }
+  
 
   getTotal(): number {
     return this.cartService.getTotal();

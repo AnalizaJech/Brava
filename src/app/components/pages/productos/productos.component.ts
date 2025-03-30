@@ -4,6 +4,8 @@ import { Producto } from '../../../models/producto.model';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-productos',
@@ -19,6 +21,7 @@ export class ProductosComponent implements OnInit {
 
   constructor(
     private productoService: ProductoService,
+    private http: HttpClient,
     private router: Router
   ) {}
 
@@ -46,13 +49,27 @@ export class ProductosComponent implements OnInit {
     this.router.navigate(['/admin/editar-producto', producto.id_producto]);
   }
 
-  eliminarProducto(producto: Producto) {
+  eliminarProducto(id: number) {
     if (confirm('¿Estás seguro de eliminar este producto?')) {
-      this.productoService.eliminarProducto(producto.id_producto).subscribe(() => {
-        this.obtenerProductos();
+      const token = localStorage.getItem('token');
+  
+      this.http.delete(`${environment.apiUrl}/productos/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      }).subscribe({
+        next: () => {
+          alert('✅ Producto eliminado correctamente');
+          this.obtenerProductos(); // recargar
+        },
+        error: (err: any) => {
+          console.error('Error al eliminar producto:', err);
+          const mensaje = err?.error?.message || '❌ Error al eliminar el producto';
+          alert(mensaje);
+        },
       });
     }
   }
+  
+  
 
   // Paginación: método para cambiar la página
   changePage(page: number) {

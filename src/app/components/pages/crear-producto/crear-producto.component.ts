@@ -26,30 +26,37 @@ export class CrearProductoComponent {
   }
 
   crearProducto() {
-    // Validación de campos obligatorios
     if (this.form.invalid) {
       alert('Por favor, complete todos los campos correctamente.');
       return;
     }
   
-    // Asegurarse de que stock es un número y mayor o igual a 0
-    const stock = this.form.value.stock;
-    if (isNaN(stock) || stock < 0) {
+    const formValue = this.form.value;
+  
+    // Convertir campos numéricos explícitamente
+    const body = {
+      ...formValue,
+      precio: Number(formValue.precio),
+      porcentaje_oferta: Number(formValue.porcentaje_oferta),
+      stock: Number(formValue.stock),
+    };
+  
+    // Validación extra
+    if (isNaN(body.stock) || body.stock < 0) {
       alert('El campo "Stock" debe ser un número válido y mayor o igual a 0.');
       return;
     }
   
-    // Preparar el cuerpo de la solicitud
-    const body = this.form.value;  // Usando los valores del formulario
-  
-    // Hacer la solicitud POST a la API
     this.http.post(`${environment.apiUrl}/productos`, body).subscribe({
       next: () => {
         alert('Producto creado correctamente ✅');
-        // Limpiar los campos después de la creación
         this.form.reset();
       },
-      error: () => alert('Error al crear producto ❌'),
+      error: (err) => {
+        console.error(err);
+        alert('Error al crear producto ❌');
+      },
     });
   }
+  
 }

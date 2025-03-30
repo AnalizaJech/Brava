@@ -16,4 +16,10 @@ export class VentaService {
   misVentas(): Observable<any[]> {
     return this.http.get<any[]>(`${this.api}/mis-compras`);
   }
+  
+  getVentasGlobales(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.api}/ventas-globales`);
+  }
+  
+  
 }

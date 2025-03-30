@@ -11,14 +11,27 @@ export const roleGuard = (allowedRoles: string[]): CanActivateFn => {
       return false;
     }
 
-    const decodedToken = JSON.parse(atob(token.split('.')[1]));
-    const userRole = decodedToken.rol;
+    try {
+      const decodedToken = JSON.parse(atob(token.split('.')[1]));
+      const userRole = decodedToken.rol;
 
-    if (!allowedRoles.includes(userRole)) {
-      router.navigate(['/login']); // O redirigir a otra ruta específica
+      if (!allowedRoles.includes(userRole)) {
+        // Redirigir según el rol real
+        if (userRole === 'cliente') {
+          router.navigate(['/cliente']);
+        } else if (userRole === 'admin') {
+          router.navigate(['/admin']);
+        } else {
+          router.navigate(['/login']);
+        }
+        return false;
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error al decodificar token:', error);
+      router.navigate(['/login']);
       return false;
     }
-
-    return true;
   };
 };
