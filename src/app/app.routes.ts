@@ -6,7 +6,7 @@ import { roleGuard } from './guards/role.guard';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-  
+
     // ADMIN layout con prefijo /admin
     {
       path: 'admin',
@@ -24,12 +24,15 @@ export const routes: Routes = [
         },
         {
           path: 'crear-producto',
-          
           loadComponent: () => import('./components/pages/crear-producto/crear-producto.component').then(m => m.CrearProductoComponent),
+        },
+        {
+          path: 'editar-producto/:id', // Ruta para editar producto
+          loadComponent: () => import('./components/pages/editar-producto/editar-producto.component').then(m => m.EditarProductoComponent),
         },
       ]
     },
-  
+
     // CLIENTE layout con prefijo /cliente
     {
         path: 'cliente',
@@ -55,10 +58,8 @@ export const routes: Routes = [
             loadComponent: () =>
               import('./components/pages/ventas/mis-compras/mis-compras.component').then(m => m.MisComprasComponent),
           },
-          
         ]
-      },
-  
+    },
+
     { path: '**', redirectTo: 'login' }
-  ];
-  
+];

@@ -1,0 +1,72 @@
+<div class="min-h-screen flex items-center justify-center px-4">
+  <form (ngSubmit)="editarProducto()" class="backdrop-blur-xl bg-white/10 border border-white/20 rounded-3xl shadow-2xl p-10 w-full sm:max-w-3xl md:max-w-4xl text-white overflow-hidden">
+    
+    <!-- Encabezado -->
+    <div class="flex justify-between items-center mb-6">
+      <div class="flex items-center gap-2 text-cyan-400">
+        <div class="bg-cyan-500/20 p-4 rounded-full border border-cyan-400/40 shadow-md">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-cyan-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h11l3.2-6.4a1 1 0 0 0-.9-1.6H6.2L5.3 4H3m4 9l-1.2 5.6A1 1 0 0 0 7 20h10a1 1 0 0 0 1-1l1-4M9 22a1 1 0 1 0 0-2 1 1 0 0 0 0 2Zm8 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2" />
+          </svg>
+        </div>
+        <span class="text-2xl font-bold">JechCommerce</span>
+      </div>
+      <div class="text-right text-white">
+        <h2 class="text-3xl font-extrabold text-cyan-200 mb-2">Editar Producto</h2>
+        <p class="text-cyan-100 text-sm mb-4">Desde el panel de administración</p>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <!-- Columna 1 -->
+      <div>
+        <input type="text" [(ngModel)]="form.nom_producto" name="nom_producto" placeholder="Nombre del producto"
+          class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-cyan-200 mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" required>
+
+        <textarea [(ngModel)]="form.descripcion" name="descripcion" placeholder="Descripción"
+          class="w-full px-4 py-3 min-h-[100px] resize-none rounded-xl border border-white/20 bg-white/10 text-white placeholder-cyan-200 mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" required></textarea>
+
+        <input type="number" [(ngModel)]="form.precio" name="precio" placeholder="Precio"
+          class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-cyan-200 mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" required>
+      </div>
+
+      <!-- Columna 2 -->
+      <div>
+        <input type="number" [(ngModel)]="form.stock" name="stock" placeholder="Stock"
+          class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-cyan-200 mb-4 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition" required>
+
+        <label class="flex items-center gap-2 text-cyan-200 mb-4">
+          <input type="checkbox" [(ngModel)]="form.is_oferta" name="is_oferta" class="accent-cyan-400 cursor-pointer">
+          ¿Está en oferta?
+        </label>
+
+        <!-- Solo mostrar si está en oferta -->
+        <input *ngIf="form.is_oferta" type="number" [(ngModel)]="form.porcentaje_oferta" name="porcentaje_oferta"
+          placeholder="Porcentaje de oferta (%)"
+          class="w-full px-4 py-3 rounded-xl border border-white/20 bg-white/10 text-white placeholder-cyan-200 mb-6 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition">
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="flex justify-between items-center mt-6">
+      <!-- Cancelar -->
+      <button routerLink="/admin/productos"
+        class="cursor-pointer text-cyan-400 hover:text-cyan-500 text-lg font-semibold flex items-center gap-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+          <path d="M0 0h24v24H0z" stroke="none" />
+          <path d="M18.364 5.636l-12.728 12.728" />
+          <path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+        </svg>
+        Cancelar
+      </button>
+
+      <!-- Guardar -->
+      <button type="submit"
+        class="w-full sm:w-auto bg-cyan-400 hover:bg-cyan-500 text-gray-900 font-bold py-3 px-8 rounded-xl transition shadow-lg hover:shadow-cyan-400/50 cursor-pointer">
+        Guardar Cambios
+      </button>
+    </div>
+  </form>
+</div>
