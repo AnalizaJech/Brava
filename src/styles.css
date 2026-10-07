@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@400;500;600&display=swap");
 :root {
   --canvas: #faf7f2;
   --espresso: #2c211c;
@@ -20,7 +20,7 @@ body {
   background: var(--canvas);
   color: var(--espresso);
   font:
-    13px "Manrope",
+    13px "Jost",
     sans-serif;
   padding-top: 88px;
 }
@@ -175,7 +175,7 @@ a:hover {
   border-radius: 50%;
 }
 h1 {
-  font-family: "Manrope", sans-serif;
+  font-family: "Jost", sans-serif;
   font-size: clamp(52px, 5.4vw, 86px);
   font-weight: 500;
   line-height: 1.1;
@@ -387,7 +387,7 @@ h1 em {
   background: none;
   color: var(--espresso);
   font:
-    10px "Manrope",
+    10px "Jost",
     sans-serif;
   width: 165px;
   padding: 3px 0;
@@ -615,7 +615,7 @@ h1 em {
 }
 .craft-copy h2 {
   font:
-    500 48px/1.18 "Manrope",
+    500 48px/1.18 "Jost",
     sans-serif;
   letter-spacing: -1px;
   margin: 27px 0 23px;
@@ -648,7 +648,7 @@ h1 em {
   font-weight: 400;
   letter-spacing: 0;
   font:
-    italic 14px "Manrope",
+    italic 14px "Jost",
     sans-serif;
   display: block;
   margin-top: 8px;
@@ -914,7 +914,7 @@ footer {
 }
 .empty-state h3 {
   font:
-    26px "Manrope",
+    26px "Jost",
     sans-serif;
   margin: 20px 0 12px;
 }
@@ -1062,7 +1062,7 @@ footer {
 }
 .care-content h2 {
   font:
-    42px/1.2 "Manrope",
+    42px/1.2 "Jost",
     sans-serif;
   margin: 25px 0;
 }

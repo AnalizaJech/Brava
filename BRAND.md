@@ -4,7 +4,7 @@
 
 ## Dirección visual
 
-Espresso #2c211c, arena #ece4d7, cognac #a96b46 y marfil #faf7f2. Manrope en navegación y logotipo; Playfair Display en titulares editoriales. Fotografía individual protagonista, espacio generoso, contraste sobrio y controles personalizados con iconos de trazo.
+Editorial y serena: blanco cálido, tinta, lino y cacao. Cormorant Garamond en marca y títulos; Jost en lectura y controles. Fotografías protagonistas, tarjetas verticales y separadores finos. Sin costuras decorativas ni bloques negros dominantes. La aplicación se documenta en DESIGN-SYSTEM.md.
 
 ## Voz y experiencia
 
@@ -13,3 +13,4 @@ Cercana y precisa, sin urgencia artificial, reseñas inventadas ni contadores fa
 ## Catálogo
 
 Doce modelos reales seleccionados en las tiendas oficiales de Schott N.Y.C. y Portland Leather Goods. La identidad comercial de BRAVA no se aplica al producto como si fuese su fabricante. Fotografías, marca y origen se atribuyen de forma visible; no se afirma distribución autorizada ni inventario ya importado.
+

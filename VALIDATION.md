@@ -31,3 +31,7 @@ La calculadora interna, excluida del build, mantiene los escenarios previamente 
 Guardados conservan búsqueda y categoría. Persistencia, retirada y estado vacío comprobados. Menú móvil de tres enlaces sin filtros ni políticas. Navegador a 320, 390, 768 y 1440 px sin desbordamiento; confirmación de bolsa sin aviso duplicado. Capturas y GIF del README actualizados.
 
 Refinamiento: comprobados guardar/quitar desde la ficha (aria-pressed, relleno y fondo), copiar enlace, margen de cuidados en escritorio, pedido decodificado con BV-03/talla S sin emojis ni caracteres de reemplazo, y adaptación entre 320 y 1440 px.
+
+## Dirección editorial elegante
+
+Fuentes Jost y Cormorant Garamond cargadas y comprobadas en navegador. Sin desbordamiento de página ni ficha a 320, 390, 768, 1024 y 1440 px. Menú completo, guardados conservan búsqueda/categoría, bolsa y mensaje de WhatsApp mantienen la variante exacta. Portada, catálogo, esencia, footer, ficha y menú revisados visualmente; capturas y GIF renovados.

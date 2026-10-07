@@ -18,7 +18,7 @@ Una experiencia de compra de cuero con estética editorial, variantes claras y a
 
 ## Una pieza. Todos sus detalles.
 
-BRAVA transforma un catálogo en una experiencia de compra asistida: encontrar una pieza, inspeccionarla desde diferentes ángulos, elegir color y talla y llevar una selección completa a WhatsApp. La interfaz utiliza una paleta de cuero silla de montar, espresso, tiza y latón, tipografía editorial y controles personalizados.
+BRAVA transforma un catálogo en una experiencia de compra asistida: encontrar una pieza, inspeccionarla desde diferentes ángulos, elegir color y talla y llevar una selección completa a WhatsApp. La interfaz utiliza una paleta de blanco cálido, tinta y cacao, títulos en Cormorant Garamond, lectura en Jost y controles personalizados.
 
 ![Demostración de producto, variantes, zoom y bolsa](docs/media/shopping-demo.gif)
 
@@ -63,7 +63,7 @@ El centro de ayuda resuelve selección de tallas, materiales, cuidados, compras 
 
 ## Diseño y navegación
 
-Inicio, Tienda y La esencia. Categorías solo en la tienda; guardados en un panel independiente; ayuda y políticas en el footer. Identidad de cuero, costuras y latón documentada en [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
+Inicio, Tienda y La esencia. Categorías solo en la tienda; guardados en un panel independiente; ayuda y políticas en el footer. Dirección editorial de cuero, tipografía y referencias ecommerce documentadas en [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
 
 ## Arquitectura
 

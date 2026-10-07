@@ -13,9 +13,21 @@ No hay una colección LIVE paralela. Los códigos BV siguen identificando produc
 
 ## Identidad visual
 
-Cuero silla de montar `#79482f`, espresso `#241c17`, tiza `#f5f1e8` y latón `#b99a62`. Manrope como única familia para titulares, lectura y controles, con jerarquía por tamaño y peso. Costuras discontinuas y textura discreta hacen referencia al material sin competir con las fotografías oficiales.
+Dirección editorial de marroquinería: blanco cálido `#fcfbf8`, tinta `#282622`, lino `#f1ede6` y cacao `#815333`. Sin texturas, costuras decorativas ni bloques negros dominantes.
 
-`src/design-system.css` concentra los tokens y la composición de esta dirección visual. `src/styles.css` mantiene los componentes de ficha, zoom y bolsa. Sin dependencias adicionales para el rediseño.
+**Cormorant Garamond** para marca y títulos de portada, colección, esencia y paneles. **Jost** para lectura, nombres de productos, precios y controles. Dos funciones tipográficas estables, con pesos contenidos. Fallback Georgia para títulos y sans-serif para lectura; `font-display: swap` permite leer mientras cargan las fuentes.
+
+Fotografías completas en tarjetas verticales 4:5. Jerarquía de tarjeta: nombre, cotización, marca/referencia, categoría y colores. Categoría activa con subrayado; búsqueda y orden separados del menú. Footer claro y paneles con las mismas reglas de espacio y color.
+
+`src/design-system.css` concentra tokens y composición, con escalas de margen y sección mediante `clamp()`. `src/styles.css` conserva la base de los componentes. No se añaden dependencias.
+
+### Referencias ecommerce consultadas
+
+- [LOEWE: bolsos](https://www.loewe.com/int/en/women/bags): presentación de productos, categorías y controles de lista.
+- [Mulberry: bolsos](https://www.mulberry.com/gb/shop/women/bags): jerarquía de catálogo, guardados, bolsa y atención al cliente.
+- [Polène: handbags](https://eng.polene-paris.com/collections/handbags): separación entre modelos, categorías y materiales.
+
+Estas referencias orientan la organización; BRAVA conserva su nombre, catálogo real, canales comerciales y composición propia.
 
 ## Interacción y accesibilidad
 

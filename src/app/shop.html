@@ -39,11 +39,10 @@
 <main id="home" [attr.inert]="panel()||mobileMenu()?'':null">
   <section class="campaign">
     <div class="campaign-copy">
-      <div class="eyebrow"><span></span> CUERO. ACTITUD. TODOS LOS DÍAS.</div>
-      <h1>Piel con historia.<br /><em>Actitud propia.</em></h1>
+      <div class="eyebrow"><span></span> UNA SELECCIÓN CON CARÁCTER</div>
+      <h1>La belleza de<br /><em>lo esencial.</em></h1>
       <p>
-        Chaquetas, bolsos y accesorios de cuero de marcas en USA.
-        Elige tu pieza y encárgala desde Perú.
+        Chaquetas, bolsos y pequeños accesorios de cuero. Modelos seleccionados de marcas en USA, por encargo en Perú.
       </p>
       <button class="button button-light" (click)="explore()">
         Explorar tienda <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
@@ -53,18 +52,13 @@
       </div>
     </div>
     <div class="campaign-visual">
-      <div
-        class="product-photo hero-photo"
-        [ngStyle]="store.image(store.products[0],undefined,1)"
-        role="img"
-        aria-label="Chaqueta Schott Perfecto 618 con modelo"
-      ></div>
+      <img class="product-photo hero-photo" [src]="store.imageUrl(store.products[3],undefined,1)" width="2560" height="3200" fetchpriority="high" alt="Chaqueta de cuero Perfecto 137W de Schott N.Y.C., presentada por una modelo" />
       <div class="photo-caption">
         <div>
-          <small>EL ÍCONO / SCHOTT NYC</small><strong>Schott / Perfecto 618</strong>
+          <small>LA SELECCIÓN / SCHOTT N.Y.C.</small><strong>Perfecto 137W</strong>
         </div>
-        <button (click)="open(store.products[0])" aria-label="Ver Perfecto 618">
-          ↗
+        <button (click)="open(store.products[3])" aria-label="Ver Perfecto 137W">
+          <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
         </button>
       </div>
       <div class="vertical-label">CUERO QUE DEJA HUELLA</div>
@@ -77,10 +71,10 @@
     <div class="collection-heading">
       <div>
         <span class="eyebrow">ELIGE LO QUE VA CONTIGO</span>
-        <h2>La tienda.</h2>
+        <h2>Piezas para tu día a día.</h2>
       </div>
       <p>
-        Explora por categoría. Abre una pieza para ver<br />sus colores, medidas y fotografías.
+        Formas atemporales, detalles que importan.<br />Encuentra la pieza que va contigo.
       </p>
     </div>
     <div class="catalog-toolbar">
