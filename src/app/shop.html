@@ -46,7 +46,7 @@
         Elige tu pieza y encárgala desde Perú.
       </p>
       <button class="button button-light" (click)="explore()">
-        Explorar tienda <span>↗</span>
+        Explorar tienda <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
       </button>
       <div class="campaign-bottom">
         <span>BRAVA / LEATHER GOODS</span><span>SELECCIÓN POR ENCARGO</span>
@@ -185,7 +185,7 @@
       </article>
       }@empty{
       <div class="empty-state">
-        <span>↗</span>
+        <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
         <h3>Encuentra tu próxima pieza.</h3>
         <p>
           Prueba con otro nombre, color o categoría.
@@ -220,7 +220,7 @@
         Conoce el tipo de cuero, el ajuste y los cuidados antes de elegir. Una pieza bien elegida empieza por saber qué estás comprando.
       </p>
       <button class="text-link" (click)="panel.set('care')">
-        Cómo cuidar tus piezas <span>↗</span>
+        Cómo cuidar tus piezas <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg>
       </button>
       <div class="craft-signature">
         BRAVA <span>Hecho para acompañarte.</span>
@@ -256,9 +256,9 @@
     </button>
   </div>
   <nav class="menu-content" aria-label="Navegación móvil">
-    <a href="#home" (click)="navigate()"><small>01</small><span>Inicio</span><b>↗</b></a>
-    <a href="#collection" (click)="navigate()"><small>02</small><span>Tienda</span><b>↗</b></a>
-    <a href="#craft" (click)="navigate()"><small>03</small><span>La esencia</span><b>↗</b></a>
+    <a href="#home" (click)="navigate()"><small>01</small><span>Inicio</span><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+    <a href="#collection" (click)="navigate()"><small>02</small><span>Tienda</span><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
+    <a href="#craft" (click)="navigate()"><small>03</small><span>La esencia</span><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></a>
   </nav>
   <div class="menu-signature">CUERO QUE DEJA HUELLA.<span>BRAVA / LEATHER GOODS</span></div>
 </section>
@@ -269,6 +269,7 @@
 <section
   class="modal"
   [class.product-modal]="panel()==='product'"
+  [class.care-modal]="panel()==='care'"
   [class.zoom-modal]="panel()==='zoom'"
   [class.legal-modal]="panel()==='legal' || panel()==='size'"
   role="dialog"
@@ -286,8 +287,8 @@
   <div class="bag-heading"><span class="eyebrow">PARA VOLVER A ELLAS</span><h2>Tus guardados <span>({{savedProducts().length}})</span></h2><p class="saved-intro">Las piezas que te gustan, en un solo lugar. Guardarlas no las añade a tu bolsa.</p></div>
   <div class="saved-list">
     @for(p of savedProducts();track p.id){
-      <article class="saved-item"><button class="saved-image" (click)="open(p)" [attr.aria-label]="'Ver detalles de '+p.name"><img [src]="store.imageUrl(p)" [alt]="p.name" width="140" height="160" /></button><div><small>{{p.brand}} · {{p.sku}}</small><button class="saved-title" (click)="open(p)">{{p.name}} <span>↗</span></button><p>{{p.category}} · {{store.money(p.price)}}</p></div><button class="icon-button" (click)="store.favorite(p.id)" [attr.aria-label]="'Quitar de guardados '+p.name"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg></button></article>
-    }@empty{<div class="empty-state"><span>♡</span><h3>Aquí van tus favoritos.</h3><p>Toca el corazón de una pieza para guardarla. Tu tienda seguirá tal como la dejaste.</p><button class="button" (click)="close()">Volver a explorar <span>↗</span></button></div>}
+      <article class="saved-item"><button class="saved-image" (click)="open(p)" [attr.aria-label]="'Ver detalles de '+p.name"><img [src]="store.imageUrl(p)" [alt]="p.name" width="140" height="160" /></button><div><small>{{p.brand}} · {{p.sku}}</small><button class="saved-title" (click)="open(p)">{{p.name}} <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></button><p>{{p.category}} · {{store.money(p.price)}}</p></div><button class="icon-button" (click)="store.favorite(p.id)" [attr.aria-label]="'Quitar de guardados '+p.name"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" /></svg></button></article>
+    }@empty{<div class="empty-state"><span>♡</span><h3>Aquí van tus favoritos.</h3><p>Toca el corazón de una pieza para guardarla. Tu tienda seguirá tal como la dejaste.</p><button class="button" (click)="close()">Volver a explorar <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></button></div>}
   </div>
   }
   @if(panel()==='cart'){
@@ -435,7 +436,7 @@
         aria-label="Copiar enlace del producto"
       >
         <svg aria-hidden="true" viewBox="0 0 24 24">
-          <path d="M8 12v8h12V8h-8M4 16V4h12M8 8h8v8" />
+          <path d="m10 13 4-4M8 16l-1 1a4 4 0 0 1-6-6l4-4a4 4 0 0 1 6 0M16 8l1-1a4 4 0 0 1 6 6l-4 4a4 4 0 0 1-6 0" />
         </svg>
       </button>
     </div>
@@ -446,7 +447,7 @@
         >Importación por encargo · Precio final y envío por cotizar</span
       >
     </div>
-    <p>{{p.description}}</p><a class="source-link" [href]="p.sourceUrl" target="_blank" rel="noopener noreferrer">Ver ficha oficial de {{p.brand}} ↗</a><p class="availability-note">Por encargo · disponibilidad del proveedor por confirmar. Sin cobro en esta web.</p>
+    <p>{{p.description}}</p><a class="source-link" [href]="p.sourceUrl" target="_blank" rel="noopener noreferrer">Ver ficha oficial de {{p.brand}} <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></a><p class="availability-note">Por encargo · disponibilidad del proveedor por confirmar. Sin cobro en esta web.</p>
     <div class="color-selector">
       <span>Color: <strong>{{color()}}</strong></span>
       <div>
@@ -485,6 +486,7 @@
         >{{size()?'Añadir a mi bolsa':'Elige una talla'}}<span>+</span></button
       ><button
         class="detail-wishlist icon-button"
+        [attr.aria-pressed]="store.favorites().includes(p.id)"
         [class.saved]="store.favorites().includes(p.id)"
         (click)="store.favorite(p.id)"
         [attr.aria-label]="store.favorites().includes(p.id)?'Quitar de favoritos':'Guardar favorito'"
@@ -515,8 +517,8 @@
           Envíos en Perú por Olva o Shalom, sujetos a cobertura. Tarifa según
           destino y paquete, confirmada antes del pago.
         </p>
-        <button (click)="legalPage('shipping')">Consultar envíos ↗</button
-        ><button (click)="legalPage('returns')">Cambios y devoluciones ↗</button
+        <button (click)="legalPage('shipping')">Consultar envíos <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></button
+        ><button (click)="legalPage('returns')">Cambios y devoluciones <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></button
         >}@else{
         <p>
           Evita humedad y calor directo. Confirma el tipo de cuero y las
@@ -675,7 +677,7 @@
       <span>0{{i+1}}</span>
       <p>{{tip}}</p>
     </div>
-    }<button class="button" (click)="legalPage('faq')">Abrir centro de ayuda <span>↗</span></button>
+    }<button class="button" (click)="legalPage('faq')">Abrir centro de ayuda <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M6 18 18 6M6 6h12v12" /></svg></button>
   </div>
   }
 </section>

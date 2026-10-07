@@ -88,3 +88,32 @@ footer { background:var(--espresso); color:#f5eadd; padding-top:55px; }
  .saved-item { gap:12px; grid-template-columns:80px minmax(0,1fr) 44px; } .saved-image img { width:80px; height:100px; }
 }
 @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { animation:none!important; transition:none!important; } }
+
+/* One type family and a restrained biker direction across every surface. */
+:root { --saddle:#242321; --copper:#815333; }
+body,button,input,h1,h2,h3,.menu-content > a,.care-content h2,.footer-seal { font-family:"Manrope",sans-serif; }
+h1,h2,.detail-info h2,.care-content h2 { font-weight:700; }
+.campaign h1 { font-size:clamp(44px,4.8vw,72px); letter-spacing:-3px; line-height:1.08; }
+.campaign h1 em,.craft-copy h2 em { font-style:normal; font-weight:700; }
+.campaign-copy { background:radial-gradient(ellipse at 15% 10%,#65513c40,transparent 70%),#242321; }
+.detail-info h2 { font-size:clamp(26px,2.7vw,40px); line-height:1.2; letter-spacing:-1px; margin:20px 0 12px; overflow-wrap:anywhere; }
+.detail-kicker { align-items:center; gap:20px; }
+.detail-kicker > .icon-button { flex-shrink:0; border:1px solid var(--line); border-radius:3px; }
+.detail-price { margin:20px 0; font-size:24px; }
+.detail-info > p { line-height:1.8; }
+.source-link { display:inline-flex; align-items:center; gap:8px; font-size:12px; margin:18px 0; }
+.arrow-icon { width:16px; height:16px; flex-shrink:0; vertical-align:middle; }
+.menu-content > a > .arrow-icon { margin-left:auto; width:26px; height:26px; }
+.accordion-content > button { display:inline-flex; align-items:center; gap:8px; padding:12px 0; margin-right:24px; min-height:44px; text-align:left; }
+.detail-wishlist.saved,.save-button.saved { background:#815333; color:#fffdf8; border-color:#815333; }
+.detail-wishlist.saved:hover,.save-button.saved:hover { color:#fffdf8; background:#674029; }
+.detail-wishlist.saved svg,.save-button.saved svg { fill:currentColor; stroke:currentColor; }
+.favorite-nav.is-active svg { fill:#815333; stroke:#815333; }
+.detail-wishlist { transition:background-color .15s,color .15s; }
+.care-content { padding:32px; }
+.care-content h2 { font-size:32px; line-height:1.25; letter-spacing:-1px; }
+.care-tip { gap:20px; align-items:flex-start; }
+.care-tip span { padding-top:4px; flex-shrink:0; }
+.care-tip p,.care-content > p { font-size:13px; }
+.care-content > .button { width:100%; }
+@media(max-width:760px) { .campaign h1 { font-size:clamp(37px,10vw,58px); letter-spacing:-1.5px; } .detail-info h2 { font-size:28px; } .care-content { padding:28px 24px; } .care-content h2 { font-size:28px; } }

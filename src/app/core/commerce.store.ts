@@ -36,17 +36,17 @@ export class CommerceStore {
    Variante: ${variant?.supplierVariant ?? 'Por confirmar'}`;
     });
     const destination = this.destination().replace(/[\r\n]/g, ' ').trim().slice(0,100) || 'Por indicar';
-    const text = `🛍️ BRAVA | SOLICITUD DE COMPRA
+    const text = `BRAVA | SOLICITUD DE COMPRA
 Referencia: ${this.orderReference}
 
-📦 ARTÍCULOS (${this.count()} unidades)
+ARTÍCULOS (${this.count()} unidades)
 ${lines.join('\n\n')}
 
-🚚 ENTREGA EN PERÚ
+ENTREGA EN PERÚ
 Ciudad / distrito: ${destination}
 Transporte: ${this.carrier()}
 
-💬 Solicito cotización final en soles o dólares, disponibilidad y plazo de importación / entrega para esta selección. Incluir envío, condiciones de cambios y medios de pago antes de confirmar.
+Solicito cotización final en soles o dólares, disponibilidad y plazo de importación / entrega para esta selección. Incluir envío, condiciones de cambios y medios de pago antes de confirmar.
 
 Esta solicitud no reserva productos ni acredita un pago.`;
     return `https://wa.me/${STORE.phone}?text=${encodeURIComponent(text)}`;

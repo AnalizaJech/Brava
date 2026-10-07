@@ -13,7 +13,7 @@ No hay una colección LIVE paralela. Los códigos BV siguen identificando produc
 
 ## Identidad visual
 
-Cuero silla de montar `#79482f`, espresso `#241c17`, tiza `#f5f1e8` y latón `#b99a62`. Playfair Display para titulares editoriales; Manrope para lectura y controles. Costuras discontinuas y textura discreta hacen referencia al material sin competir con las fotografías oficiales.
+Cuero silla de montar `#79482f`, espresso `#241c17`, tiza `#f5f1e8` y latón `#b99a62`. Manrope como única familia para titulares, lectura y controles, con jerarquía por tamaño y peso. Costuras discontinuas y textura discreta hacen referencia al material sin competir con las fotografías oficiales.
 
 `src/design-system.css` concentra los tokens y la composición de esta dirección visual. `src/styles.css` mantiene los componentes de ficha, zoom y bolsa. Sin dependencias adicionales para el rediseño.
 
@@ -33,3 +33,7 @@ Una confirmación visible al añadir a bolsa; sin segundo aviso redundante. Vari
 ## Comprobación
 
 Probado en navegador a 320, 390, 768 y 1440 px: sin desbordamiento horizontal; guardados independientes, persistencia y estado vacío; menú de tres enlaces; variantes, zoom y confirmación única de bolsa. Compilación para `/Brava/`, CSP y verificación de 12 modelos y 82 fotografías conservadas.
+
+## Refinamiento de ficha
+
+Organización inspirada en la ficha oficial de [Schott 141](https://www.schottnyc.com/products/141-classic-racer-leather-motorcycle-jacket): galería, modelo, variantes, acción de bolsa y especificaciones. Corazones rellenos y fondo contrastado al guardar, iconos SVG coherentes, cuidados con margen interior y mensaje comercial sin emojis para evitar caracteres rotos en clientes de WhatsApp.
