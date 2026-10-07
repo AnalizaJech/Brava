@@ -194,10 +194,10 @@
           ><strong>{{store.money(p.price)}}</strong>
         </div>
         <div class="sku-line">
-          {{p.sku}} <span>Consulta disponibilidad</span>
+          {{p.sku}} <span>{{p.brand}}</span>
         </div>
         <div class="product-subtitle">
-          <span>{{p.brand}}</span>
+          <span>{{p.audience}} · {{p.category}}</span>
           <div class="card-swatches">
             @for(c of p.colors;track c.name){<button
               [style.background]="c.hex"

@@ -86,7 +86,7 @@ flowchart LR
 
 ## Ejecutar en local
 
-Requisitos: Node.js 22 y npm.
+Requisitos: Node.js 22 y npm 10.9.9 (misma versión fijada en CI).
 
 ```bash
 npm ci

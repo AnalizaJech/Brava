@@ -16,6 +16,7 @@
 - Bolsa sin superposición de checkout sobre los artículos; encabezado completo y reinicio de desplazamiento al abrir. Menú móvil 390 × 844 sin desborde horizontal.
 - Se descartaron producto inexistente, talla/color inválidos, 999 unidades y duplicados. SKU/precio falsificados en localStorage no alteraron la referencia del pedido.
 - Borrar datos locales elimina bolsa y favoritos.
+- Instalación limpia con npm 10.9.9, lock regenerado sin árbol previo de Windows y compilación posteriores completadas. CI fija npm y usa acciones compatibles con Node 24.
 - Auditoría npm: 0 vulnerabilidades. Recorrido final: 0 errores de ejecución de aplicación.
 - Zoom con arrastre y aumento 150% incluido en el recorrido grabado. Pellizco táctil y controles de teclado se mantienen del visor validado previamente.
 
