@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="es">
+  <meta charset="utf-8" /><meta
+    name="viewport"
+    content="width=device-width,initial-scale=1"
+  /><title>BRAVA · Calculadora de costos</title
+  ><style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      background: #f6f2eb;
+      color: #30251d;
+      font: 15px system-ui;
+    }
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 24px;
+    }
+    small {
+      letter-spacing: 0.12em;
+      color: #8c6145;
+    }
+    h1 {
+      font-size: 40px;
+      font-weight: 500;
+      letter-spacing: -2px;
+    }
+    p {
+      line-height: 1.7;
+      color: #74675d;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    label {
+      font-size: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    input {
+      border: 1px solid #c9bdae;
+      background: #fffaf3;
+      border-radius: 8px;
+      padding: 14px;
+      width: 100%;
+      font: inherit;
+      color: inherit;
+      outline-offset: 3px;
+    }
+    input::-webkit-inner-spin-button,
+    input::-webkit-outer-spin-button {
+      appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      appearance: textfield;
+    }
+    input:focus {
+      outline: 2px solid #96704f;
+    }
+    .result {
+      background: #30251d;
+      color: #fcf7ef;
+      padding: 30px;
+      border-radius: 14px;
+    }
+    .result p {
+      color: #cbb8a5;
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      border-bottom: 1px solid #645247;
+      padding: 14px 0;
+      font-size: 13px;
+    }
+    .price {
+      font-size: 40px;
+      margin: 12px 0;
+    }
+    .toggle {
+      display: flex;
+      gap: 6px;
+      margin: 24px 0;
+    }
+    .toggle button {
+      border: 1px solid #c9bdae;
+      padding: 12px;
+      background: transparent;
+      color: inherit;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .toggle button[aria-pressed="true"] {
+      background: #30251d;
+      color: #fff;
+    }
+    .note {
+      font-size: 12px;
+    }
+    a {
+      color: #8c6145;
+    }
+    @media (max-width: 700px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 32px;
+      }
+      .fields {
+        gap: 12px;
+      }
+    }
+  </style>
+  <main>
+    <small>BRAVA / HERRAMIENTA INTERNA</small>
+    <h1>Un precio con margen.<br />Un envío sin sorpresas.</h1>
+    <p>
+      Simulación local para una pieza. Usa costos documentados y una cotización
+      real de Olva o Shalom. No guarda datos ni publica precios en la tienda.
+    </p>
+    <div class="layout">
+      <section>
+        <div class="fields">
+          <label
+            >Compra por unidad · USD<input
+              id="usd"
+              type="number"
+              min="0"
+              step=".01"
+              value="20" /></label
+          ><label
+            >Tipo de cambio · PEN por USD<input
+              id="fx"
+              type="number"
+              min=".01"
+              step=".01"
+              value="3.8" /></label
+          ><label
+            >Flete de importación / unidad · PEN<input
+              id="freight"
+              type="number"
+              min="0"
+              step=".01"
+              value="10" /></label
+          ><label
+            >Otros costos no recuperables / unidad · PEN<input
+              id="other"
+              type="number"
+              min="0"
+              step=".01"
+              value="14" /></label
+          ><label
+            >Margen sobre venta neta · %<input
+              id="margin"
+              type="number"
+              min="0"
+              max="95"
+              step="1"
+              value="30" /></label
+          ><label
+            >IGV para esta simulación · %<input
+              id="tax"
+              type="number"
+              min="0"
+              max="100"
+              step=".1"
+              value="18" /></label
+          ><label
+            >Envío cotizado por caja · PEN<input
+              id="box"
+              type="number"
+              min="0"
+              step=".01"
+              value="20" /></label
+          ><label
+            >Cajas del pedido<input
+              id="boxes"
+              type="number"
+              min="1"
+              step="1"
+              value="1" /></label
+          ><label
+            >Unidades de esta pieza en el pedido<input
+              id="qty"
+              type="number"
+              min="1"
+              step="1"
+              value="2"
+          /></label>
+        </div>
+        <div class="toggle" role="group" aria-label="Tratamiento del envío">
+          <button id="separate" aria-pressed="true">Envío separado</button
+          ><button id="included" aria-pressed="false">
+            Absorber envío en precio
+          </button>
+        </div>
+        <p class="note">
+          El tipo de cambio es manual; 3.80 es solo un ejemplo. El envío por
+          caja es un dato ingresado, no una tarifa oficial. El margen se calcula
+          sobre venta neta, no como recargo al costo. No incluyas como costo un
+          crédito fiscal recuperable sin revisar su tratamiento con un contador.
+        </p>
+      </section>
+      <section>
+        <div class="result">
+          <small>PRECIO SIMULADO POR UNIDAD</small>
+          <div class="price" id="price"></div>
+          <p>Incluye el IGV indicado. No vuelvas a sumarlo al cobrar.</p>
+          <div class="row">
+            <span>Costo de la pieza</span><strong id="cost"></strong>
+          </div>
+          <div class="row">
+            <span>Venta neta / unidad</span><strong id="net"></strong>
+          </div>
+          <div class="row">
+            <span>IGV / unidad</span><strong id="igv"></strong>
+          </div>
+          <div class="row">
+            <span>Margen bruto / unidad</span><strong id="profit"></strong>
+          </div>
+          <div class="row">
+            <span>Envío del pedido</span><strong id="shipping"></strong>
+          </div>
+          <div class="row">
+            <span>Total del pedido</span><strong id="total"></strong>
+          </div>
+        </div>
+        <p class="note" id="validation" role="status"></p>
+        <p class="note">
+          Esta herramienta no determina tu régimen, obligaciones tributarias,
+          tributos de importación ni crédito fiscal. El 18% es la tasa general
+          combinada de una operación gravada en 2026; no implica que corresponda
+          a toda operación o régimen.
+        </p>
+        <p class="note">
+          <a
+            href="https://www.gob.pe/7910-impuesto-general-a-las-ventas-igv"
+            target="_blank"
+            rel="noopener noreferrer"
+            >Información oficial del IGV · SUNAT ↗</a
+          >
+        </p>
+      </section>
+    </div>
+  </main>
+  <script>
+    let absorb = false;
+    const ids = [
+      "usd",
+      "fx",
+      "freight",
+      "other",
+      "margin",
+      "tax",
+      "box",
+      "boxes",
+      "qty",
+    ];
+    const money = (n) =>
+      new Intl.NumberFormat("es-PE", {
+        style: "currency",
+        currency: "PEN",
+      }).format(n);
+    function calculate() {
+      const d = Object.fromEntries(
+        ids.map((id) => [id, Number(document.getElementById(id).value)]),
+      );
+      const valid =
+        ids.every(
+          (id) =>
+            document.getElementById(id).value !== "" &&
+            Number.isFinite(d[id]) &&
+            document.getElementById(id).checkValidity(),
+        ) &&
+        Number.isInteger(d.boxes) &&
+        Number.isInteger(d.qty);
+      document.getElementById("validation").textContent = valid
+        ? "Simulación válida. Redondea el precio comercial y vuelve a comprobar el margen antes de publicar."
+        : "Completa valores válidos: cantidades enteras positivas y margen entre 0 y 95%.";
+      if (!valid) {
+        for (const id of [
+          "price",
+          "cost",
+          "net",
+          "igv",
+          "profit",
+          "shipping",
+          "total",
+        ])
+          document.getElementById(id).textContent = "—";
+        return;
+      }
+      const shipping = d.box * d.boxes,
+        cost = d.usd * d.fx + d.freight + d.other,
+        effective = cost + (absorb ? shipping / d.qty : 0),
+        net = effective / (1 - d.margin / 100),
+        igv = (net * d.tax) / 100,
+        price = net + igv;
+      for (const [id, v] of Object.entries({
+        cost,
+        net,
+        igv,
+        price,
+        profit: net - effective,
+        shipping,
+        total: price * d.qty + (absorb ? 0 : shipping),
+      }))
+        document.getElementById(id).textContent = money(v);
+      document.getElementById("shipping").textContent =
+        money(shipping) + (absorb ? " · absorbido" : " · separado");
+    }
+    ids.forEach((id) =>
+      document.getElementById(id).addEventListener("input", calculate),
+    );
+    for (const id of ["separate", "included"])
+      document.getElementById(id).addEventListener("click", () => {
+        absorb = id === "included";
+        document
+          .getElementById("separate")
+          .setAttribute("aria-pressed", String(!absorb));
+        document
+          .getElementById("included")
+          .setAttribute("aria-pressed", String(absorb));
+        calculate();
+      });
+    calculate();
+  </script>
+</html>

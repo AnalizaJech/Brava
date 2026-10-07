@@ -1,0 +1,773 @@
+<header class="site-header" [attr.inert]="panel()||mobileMenu()?'':null">
+  <a class="wordmark" href="#" aria-label="BRAVA, inicio"
+    >BRAVA<span>LEATHER & LIFESTYLE</span></a
+  >
+  <nav aria-label="Principal">
+    <button (click)="explore()">Colección</button
+    ><button (click)="explore('Bolsos')">Bolsos</button
+    ><button (click)="explore('Chaquetas')">Chaquetas</button><button (click)="legalPage('faq')">Ayuda</button
+    ><button class="live-nav" (click)="live()">
+      <span class="live-dot"></span>Selección LIVE
+    </button>
+  </nav>
+  <div class="header-actions">
+    <button
+      class="icon-button favorite-nav"
+      [class.is-active]="onlyFavorites()"
+      (click)="favorites()"
+      aria-label="Ver favoritos"
+    >
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"
+        />
+      </svg></button
+    ><button
+      class="cart-nav"
+      (click)="panel.set('cart')"
+      [attr.aria-label]="'Abrir bolsa, '+store.count()+' piezas'"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M5 7h14l1 14H4L5 7Zm3 0V5a4 4 0 0 1 8 0v2" /></svg
+      ><span>Bolsa</span><b>{{store.count()}}</b></button
+    ><button
+      class="icon-button menu-toggle"
+      (click)="mobileMenu.set(!mobileMenu())"
+      [attr.aria-expanded]="mobileMenu()"
+      aria-label="Abrir menú"
+    >
+      <svg viewBox="0 0 24 24"><path d="M4 8h16M4 16h16" /></svg>
+    </button>
+  </div>
+</header>
+<main [attr.inert]="panel()||mobileMenu()?'':null">
+  <section class="campaign">
+    <div class="campaign-copy">
+      <div class="eyebrow"><span></span> OBJETOS CON CARÁCTER / VOL. 01</div>
+      <h1>Lo esencial.<br /><em>Con carácter.</em></h1>
+      <p>
+        Formas que acompañan. Texturas que cuentan.<br />Cuero pensado para
+        formar parte de tu historia.
+      </p>
+      <button class="button button-light" (click)="explore()">
+        Explorar la colección <span>↗</span>
+      </button>
+      <div class="campaign-bottom">
+        <span>MENOS, PERO MEJOR.</span><span>01 — 12</span>
+      </div>
+    </div>
+    <div class="campaign-visual">
+      <div
+        class="product-photo hero-photo"
+        [ngStyle]="store.image(store.products[0],undefined,1)"
+        role="img"
+        aria-label="Chaqueta Schott Perfecto 618 con modelo"
+      ></div>
+      <div class="photo-caption">
+        <div>
+          <small>LA PIEZA DEL MES</small><strong>Schott / Perfecto 618</strong>
+        </div>
+        <button (click)="open(store.products[0])" aria-label="Ver Perfecto 618">
+          ↗
+        </button>
+      </div>
+      <div class="vertical-label">THE EVERYDAY COLLECTION</div>
+    </div>
+  </section>
+  <div class="service-strip">
+    <span><i>01</i> Diseño que trasciende temporadas</span
+    ><span><i>02</i> Modelos reales · marcas verificadas</span
+    ><span><i>03</i> Elige. Consulta. Hazlo tuyo.</span>
+  </div>
+  <section class="live-entry">
+    <div>
+      <span class="live-dot"></span><strong>¿Vienes de nuestro LIVE?</strong>
+      <p>
+        Busca el código de la pieza, elige tu variante y consúltala por
+        WhatsApp.
+      </p>
+    </div>
+    <button (click)="live()">Ver selección <span>↗</span></button>
+  </section>
+  <section id="collection" class="collection">
+    <div class="collection-heading">
+      <div>
+        <span class="eyebrow">UNA NUEVA FORMA DE LLEVAR LO ESENCIAL</span>
+        <h2>{{onlyFavorites()?'Tus piezas favoritas.':'La colección.'}}</h2>
+      </div>
+      <p>
+        Para los días que se convierten en historias.<br />Descubre tu próximo
+        compañero.
+      </p>
+    </div>
+    <div class="catalog-toolbar">
+      <div class="category-tabs" aria-label="Categorías">
+        @for(c of categories;track c){<button
+          [class.active]="category()===c"
+          [attr.aria-pressed]="category()===c"
+          (click)="category.set(c)"
+        >
+          {{c}}</button
+        >}
+      </div>
+      <div class="catalog-tools">
+        <label class="search-field"
+          ><svg viewBox="0 0 24 24">
+            <circle cx="10" cy="10" r="6" />
+            <path d="m15 15 5 5" /></svg
+          ><input
+            aria-label="Buscar piezas"
+            placeholder="Nombre, categoría o código BV"
+            [ngModel]="query()"
+            (ngModelChange)="query.set($event)"
+          />@if(query()){<button
+            (click)="query.set('')"
+            aria-label="Limpiar búsqueda"
+          >
+            ×</button
+          >}</label
+        >
+        <div class="sort-picker">
+          <button
+            class="sort-trigger"
+            (click)="sortOpen.set(!sortOpen())"
+            [attr.aria-expanded]="sortOpen()"
+          >
+            {{sort()}}<span>⌄</span></button
+          >@if(sortOpen()){
+          <div class="sort-menu" role="group" aria-label="Ordenar productos">
+            @for(s of sortOptions;track s){<button
+              [class.active]="sort()===s"
+              (click)="sort.set(s);sortOpen.set(false)"
+            >
+              {{s}} <span>{{sort()===s?'✓':''}}</span></button
+            >}
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="results-row">
+      <span
+        >{{filtered().length}} {{filtered().length===1?'pieza':'piezas'}}</span
+      >@if(liveOnly()){<button (click)="liveOnly.set(false)">
+        Selección LIVE ×</button
+      >} @if(onlyFavorites()){<button (click)="favorites()">Favoritos ×</button
+      >}<span>Diseño sin fecha de caducidad.</span>
+    </div>
+    <div class="product-grid">
+      @for(p of filtered();track p.id){
+      <article class="product-card">
+        <div class="product-media">
+          <button
+            class="photo-link"
+            (click)="open(p)"
+            [attr.aria-label]="'Ver detalles de '+p.name"
+          >
+            <img
+              class="product-photo"
+              [src]="store.imageUrl(p)"
+              loading="lazy"
+              decoding="async"
+              [attr.width]="1400"
+              [attr.height]="1400"
+              [alt]="p.name+', '+p.category+' de cuero '+p.color"
+            /></button
+          >@if(p.tag){<span class="product-tag">{{p.tag}}</span>}<button
+            class="save-button"
+            (click)="store.favorite(p.id)"
+            [class.saved]="store.favorites().includes(p.id)"
+            [attr.aria-pressed]="store.favorites().includes(p.id)"
+            [attr.aria-label]="(store.favorites().includes(p.id)?'Quitar favorito ':'Guardar favorito ')+p.name"
+          >
+            <svg viewBox="0 0 24 24">
+              <path
+                d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"
+              />
+            </svg></button
+          ><button class="quick-view" (click)="open(p)">
+            Descubrir la pieza <span>↗</span>
+          </button>
+        </div>
+        <div class="product-heading">
+          <button (click)="open(p)">{{p.name}}</button
+          ><strong>{{store.money(p.price)}}</strong>
+        </div>
+        <div class="sku-line">
+          {{p.sku}} <span>Consulta disponibilidad</span>
+        </div>
+        <div class="product-subtitle">
+          <span>{{p.brand}}</span>
+          <div class="card-swatches">
+            @for(c of p.colors;track c.name){<button
+              [style.background]="c.hex"
+              (click)="open(p);selectColor(c.name)"
+              [attr.aria-label]="'Ver '+p.name+' en '+c.name"
+            ></button
+            >}
+          </div>
+        </div>
+        <button
+          class="card-add"
+          (click)="open(p)"
+          [attr.aria-label]="'Elegir opciones de '+p.name"
+        >
+          Ver opciones<span>+</span>
+        </button>
+      </article>
+      }@empty{
+      <div class="empty-state">
+        <span>↗</span>
+        <h3>Encuentra tu próxima pieza.</h3>
+        <p>
+          {{onlyFavorites()?'Guarda tus favoritas con el corazón para
+          encontrarlas aquí.':'Prueba con otro nombre, color o categoría.'}}
+        </p>
+        <button class="button" (click)="explore()">
+          Ver toda la colección ↗
+        </button>
+      </div>
+      }
+    </div>
+    <p class="catalog-footnote">
+      Selección por encargo de modelos vendidos en USA. Fotos oficiales del fabricante; stock en Perú no confirmado. Precio final y entrega por cotizar.
+    </p>
+  </section>
+  <section id="craft" class="craft">
+    <div class="craft-image">
+      <div
+        class="product-photo"
+        [ngStyle]="store.image(store.products[4],undefined,1)"
+        role="img"
+        aria-label="Portland Crossbody Tote en Honey"
+      ></div>
+      <span>EL VALOR ESTÁ EN LOS DETALLES.</span>
+    </div>
+    <div class="craft-copy">
+      <span class="eyebrow">LA ESENCIA BRAVA</span>
+      <h2>Hay cosas que<br />mejoran <em>contigo.</em></h2>
+      <p>
+        Creemos en elegir con intención. En las formas que tienen sentido, las
+        texturas que apetece tocar y los objetos que encuentran su lugar en tu
+        vida.
+      </p>
+      <p>
+        Un buen compañero no necesita llamar la atención.<br />Solo estar ahí,
+        día tras día.
+      </p>
+      <button class="text-link" (click)="panel.set('care')">
+        Cómo cuidar tus piezas <span>↗</span>
+      </button>
+      <div class="craft-signature">
+        BRAVA <span>Hecho para acompañarte.</span>
+      </div>
+    </div>
+  </section>
+  <section class="concierge">
+    <div>
+      <span class="eyebrow">UNA CONVERSACIÓN. TU PRÓXIMA PIEZA.</span>
+      <h2>Elige con calma.<br />Nosotros te acompañamos.</h2>
+    </div>
+    <div>
+      <p>
+        Encuentra medidas en cada ficha y resuelve aquí tus dudas sobre materiales, cuidados, importación y entregas. WhatsApp se abre cuando tu selección está lista para comprar.
+      </p>
+      <button class="button" (click)="legalPage('faq')">Abrir centro de ayuda <span>↗</span></button>
+    </div>
+  </section>
+</main>
+<footer [attr.inert]="panel()||mobileMenu()?'':null">
+  <div class="footer-brand-row">
+    <div>
+      <a class="wordmark" href="#">BRAVA<span>LEATHER & LIFESTYLE</span></a>
+      <p>Carácter que se lleva.<br />Encuentra tu próxima pieza.</p>
+    </div>
+    <button class="footer-contact" (click)="legalPage('faq')"><span>Centro de ayuda<small>Medidas · cuidados · entregas</small></span><span>↗</span></button>
+  </div>
+  <div class="footer-columns">
+    <div>
+      <h3>La colección</h3>
+      @for(c of ['Chaquetas','Bolsos','Mochilas','Accesorios','Viaje'];track
+      c){<button (click)="explore(c)">{{c}}</button>}
+    </div>
+    <div>
+      <h3>Tu experiencia</h3><button (click)="legalPage('materials')">Guía de materiales y acabados</button>
+      <button (click)="live()">Selección para el LIVE</button
+      ><button (click)="favorites()">Mis favoritos</button
+      ><button (click)="panel.set('care')">Cuidado de tus piezas</button
+      ><button (click)="legalPage('faq')">Preguntas frecuentes</button>
+    </div>
+    <div>
+      <h3>Compra con claridad</h3>
+      <button (click)="legalPage('shipping')">Envíos y entregas</button
+      ><button (click)="legalPage('returns')">Cambios y devoluciones</button
+      ><button (click)="legalPage('terms')">Condiciones de compra</button
+      ><button (click)="legalPage('claims')">Libro de Reclamaciones</button>
+    </div>
+    <div>
+      <h3>Privacidad y contacto</h3>
+      <button (click)="legalPage('privacy')">Política de privacidad</button
+      ><button (click)="legalPage('privacy')">
+        Mis datos en este navegador</button
+      ><button (click)="legalPage('faq')">Centro de ayuda ↗</button>
+      <p class="seller-identity">
+        Atención a través del canal comercial de BRAVA.
+      </p>
+    </div>
+  </div>
+  <div class="footer-assurances">
+    <span>Compra asistida, sin cobros en esta web</span
+    ><span>Variantes y precio final confirmados por chat</span
+    ><span>Datos locales bajo tu control</span>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 BRAVA · Selección por encargo</span
+    ><span>Envíos en Perú · Olva / Shalom</span
+    ><span>CARÁCTER QUE SE LLEVA.</span>
+  </div>
+</footer>
+@if(mobileMenu()){
+<section
+  class="fullscreen-menu"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Menú principal"
+>
+  <div class="menu-head">
+    <a class="wordmark" href="#" (click)="mobileMenu.set(false)"
+      >BRAVA<span>LEATHER & LIFESTYLE</span></a
+    ><button
+      class="menu-close"
+      (click)="mobileMenu.set(false)"
+      aria-label="Cerrar menú"
+    >
+      ×
+    </button>
+  </div>
+  <div class="menu-content">
+    <span class="eyebrow">ENCUENTRA TU PRÓXIMA PIEZA</span>@for(c of ['Todas las
+    piezas','Chaquetas','Bolsos','Mochilas','Accesorios','Viaje'];track c;let
+    i=$index){<button (click)="explore(c)">
+      <small>0{{i+1}}</small
+      ><span>{{c==='Todas las piezas'?'Toda la colección':c}}</span
+      ><b>↗</b></button
+    >}<button class="menu-live" (click)="live()">
+      <span class="live-dot"></span><span>Selección para el LIVE</span><b>↗</b>
+    </button>
+  </div>
+  <div class="menu-bottom">
+    <button (click)="legalPage('privacy')">Privacidad</button
+    ><button (click)="legalPage('shipping')">Envíos</button
+    ><button (click)="legalPage('faq')">Centro de ayuda ↗</button>
+  </div>
+</section>
+} @if(notice()){
+<div class="notification" role="status"><span>✓</span>{{notice()}}</div>
+} @if(panel()){
+<div class="modal-backdrop" (click)="close()"></div>
+<section
+  class="modal"
+  [class.product-modal]="panel()==='product'"
+  [class.zoom-modal]="panel()==='zoom'"
+  [class.legal-modal]="panel()==='legal' || panel()==='size'"
+  role="dialog"
+  aria-modal="true"
+  [attr.aria-label]="panel()==='cart'?'Tu bolsa':panel()==='care'?'Guía de cuidado':'Detalles de la pieza'"
+>
+  <div class="modal-header">
+    <span
+      >{{panel()==='cart'?'TU SELECCIÓN':panel()==='zoom'?'INSPECCIONA LA
+      PIEZA':'BRAVA / ATENCIÓN AL DETALLE'}}</span
+    >
+    <button class="modal-close" (click)="close()" aria-label="Cerrar">×</button>
+  </div>
+  @if(panel()==='cart'){
+  <div class="bag-heading">
+    <span class="eyebrow">TUS PRÓXIMOS COMPAÑEROS</span>
+    <h2>Tu bolsa <span>({{store.count()}})</span></h2>
+  </div>
+  @if(lastAdded()){
+  <div class="cart-confirmation" role="status">
+    <span>✓</span>
+    <div>
+      <strong>{{lastAdded()}} está en tu bolsa.</strong>
+      <p>Tu selección se ha actualizado.</p>
+    </div>
+  </div>
+  }
+  <div class="cart-lines">
+    @for(line of store.items();track line.productId+line.size+line.color){
+    <article class="cart-item">
+      <div
+        class="cart-photo product-photo"
+        [ngStyle]="store.image(line.product,line.color)"
+        role="img"
+        [attr.aria-label]="line.product.name"
+      ></div>
+      <div class="cart-item-info">
+        <div>
+          <h3>{{line.product.name}}</h3>
+          <strong>{{store.money(line.product.price*line.quantity)}}</strong>
+        </div>
+        <p>
+          {{line.color}} · {{line.size}}<br /><small
+            >{{line.product.sku}}</small
+          >
+        </p>
+        <div class="quantity-control">
+          <button
+            (click)="store.change(line.productId,line.size,line.color,-1)"
+            [attr.aria-label]="'Restar '+line.product.name"
+          >
+            −</button
+          ><span>{{line.quantity}}</span
+          ><button
+            (click)="store.change(line.productId,line.size,line.color,1)"
+            [disabled]="line.quantity>=5"
+            [attr.aria-label]="'Sumar '+line.product.name"
+          >
+            +</button
+          ><button
+            class="remove-line"
+            (click)="store.remove(line.productId,line.size,line.color)"
+            [attr.aria-label]="'Eliminar '+line.product.name"
+          >
+            <svg viewBox="0 0 24 24">
+              <path d="M4 6h16M9 6V3h6v3M6 6l1 15h10l1-15M10 10v7M14 10v7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </article>
+    }@empty{
+    <div class="empty-state">
+      <span>⌑</span>
+      <h3>Lo esencial empieza aquí.</h3>
+      <p>Encuentra una pieza que haga sentido para ti.</p>
+      <button class="button" (click)="close();explore()">
+        Explorar colección ↗
+      </button>
+    </div>
+    }
+  </div>
+  @if(store.count()){
+  <div class="bag-checkout">
+    <div class="bag-total">
+      <span>Cotización del pedido<small>{{store.count()}} unidades · envío por confirmar</small></span
+      ><strong>{{store.money(store.total())}}</strong>
+    </div>
+    <div class="delivery-preferences"><label for="destination">Ciudad / distrito de entrega <span>Opcional</span></label><input id="destination" type="text" maxlength="100" autocomplete="off" placeholder="Ej. Arequipa · Cayma" [ngModel]="store.destination()" (ngModelChange)="store.destination.set($event)" /><span class="delivery-label">Transporte preferido</span><div class="carrier-options">@for(c of ['Por definir','Olva','Shalom'];track c){<button [class.active]="store.carrier()===c" [attr.aria-pressed]="store.carrier()===c" (click)="store.carrier.set(c)">{{c}}</button>}</div><small>Estos datos solo preparan tu mensaje; no se guardan en esta web.</small></div>
+    <a
+      class="button checkout-button"
+      [href]="store.whatsapp()"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Solicitar compra por WhatsApp
+      <svg viewBox="0 0 24 24">
+        <path
+          d="M21 11a9 9 0 0 1-9 9 10 10 0 0 1-4-.9L3 21l1.8-5A9 9 0 1 1 21 11Z"
+        /></svg
+    ></a>
+    <p>
+      Confirmaremos disponibilidad, precio final y envío en el chat. Tú decides
+      cuándo enviar el mensaje.
+    </p>
+    <button class="continue" (click)="close()">← Seguir explorando</button>
+  </div>
+  }} @if(panel()==='product' && selected();as p){
+
+  <div class="detail-gallery">
+    <button
+      class="gallery-main"
+      (click)="showZoom()"
+      aria-label="Ampliar imagen del producto"
+    >
+      <img
+        class="product-photo"
+        [src]="store.imageUrl(p,color(),gallery())"
+        decoding="async"
+        [attr.width]="1400"
+        [attr.height]="1400"
+        [alt]="p.name+' '+color()+', vista '+views()[gallery()]"
+      /><span class="zoom-hint"
+        ><svg viewBox="0 0 24 24">
+          <circle cx="10" cy="10" r="6" />
+          <path d="m15 15 5 5M7 10h6M10 7v6" /></svg
+        >Ampliar</span
+      >
+    </button>
+    <div class="gallery-thumbnails">
+      @for(v of views();track v;let i=$index){<button
+        [class.active]="gallery()===i"
+        [attr.aria-pressed]="gallery()===i"
+        (click)="gallery.set(i)"
+        [attr.aria-label]="'Ver perspectiva '+v"
+      >
+        <img
+          class="product-photo"
+          [src]="store.imageUrl(p,color(),i)"
+          [alt]="p.name+', '+v"
+          decoding="async"
+          [attr.width]="1400"
+          [attr.height]="1400"
+        /><small>{{v}}</small></button
+      >}
+    </div>
+    <small class="gallery-note"
+      >Fotos oficiales de {{p.brand}}. Corresponden al modelo; no acreditan stock local.</small
+    >
+  </div>
+  <div class="detail-info">
+    <div class="detail-kicker">
+      <span class="eyebrow">{{p.brand}} / {{p.audience}}</span
+      ><button
+        class="icon-button"
+        (click)="share(p)"
+        aria-label="Copiar enlace del producto"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M8 12v8h12V8h-8M4 16V4h12M8 8h8v8" />
+        </svg>
+      </button>
+    </div>
+    <h2>{{p.name}}</h2>
+    <p class="product-code">{{p.sku}} · Úsalo para consultar desde el LIVE</p>
+    <div class="detail-price">
+      {{store.money(p.price)}}<span
+        >Importación por encargo · Precio final y envío por cotizar</span
+      >
+    </div>
+    <p>{{p.description}}</p><a class="source-link" [href]="p.sourceUrl" target="_blank" rel="noopener noreferrer">Ver ficha oficial de {{p.brand}} ↗</a><p class="availability-note">Por encargo · disponibilidad del proveedor por confirmar. Sin cobro en esta web.</p>
+    <div class="color-selector">
+      <span>Color: <strong>{{color()}}</strong></span>
+      <div>
+        @for(c of p.colors;track c.name){<button
+          class="swatch"
+          [class.active]="color()===c.name"
+          [attr.aria-pressed]="color()===c.name"
+          [attr.aria-label]="'Elegir color '+c.name"
+          (click)="selectColor(c.name)"
+        >
+          <i [style.background]="c.hex"></i><small>{{c.name}}</small></button
+        >}
+      </div>
+    </div>
+    <div class="size-selector">
+      <div class="size-label">
+        <span>{{p.sizes.length>1?'Selecciona talla':'Talla única'}}</span
+        >@if(p.sizes.length>1){<button (click)="panel.set('size')">
+          Guía de tallas ↗</button
+        >}
+      </div>
+      <div>
+        @for(s of p.sizes;track s){<button
+          [class.active]="size()===s"
+          [attr.aria-pressed]="size()===s"
+          (click)="size.set(s)"
+        >
+          {{s}}</button
+        >}
+      </div>
+    </div>
+    <div class="detail-actions">
+      <button class="button" (click)="add(p,size(),color())">
+        <svg viewBox="0 0 24 24">
+          <path d="M5 7h14l1 14H4L5 7Zm3 0V5a4 4 0 0 1 8 0v2" /></svg
+        >{{size()?'Añadir a mi bolsa':'Elige una talla'}}<span>+</span></button
+      ><button
+        class="detail-wishlist icon-button"
+        [class.saved]="store.favorites().includes(p.id)"
+        (click)="store.favorite(p.id)"
+        [attr.aria-label]="store.favorites().includes(p.id)?'Quitar de favoritos':'Guardar favorito'"
+      >
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"
+          />
+        </svg>
+      </button>
+    </div>
+    <div class="product-accordions">
+      @for(tab of ['Detalles','Envíos y cambios','Cuidados'];track tab){<button
+        class="accordion-trigger"
+        (click)="specTab.set(specTab()===tab?'':tab)"
+        [attr.aria-expanded]="specTab()===tab"
+      >
+        {{tab}}<span>{{specTab()===tab?'−':'+'}}</span></button
+      >@if(specTab()===tab){
+      <div class="accordion-content">
+        @if(tab==='Detalles'){@for(spec of p.specs;track spec.label){
+        <div class="spec-row">
+          <span>{{spec.label}}</span>
+          <p>{{spec.value}}</p>
+        </div>
+        }}@else if(tab==='Envíos y cambios'){
+        <p>
+          Envíos en Perú por Olva o Shalom, sujetos a cobertura. Tarifa según
+          destino y paquete, confirmada antes del pago.
+        </p>
+        <button (click)="legalPage('shipping')">Consultar envíos ↗</button
+        ><button (click)="legalPage('returns')">Cambios y devoluciones ↗</button
+        >}@else{
+        <p>
+          Evita humedad y calor directo. Confirma el tipo de cuero y las
+          indicaciones del fabricante antes de aplicar cualquier producto de
+          limpieza.
+        </p>
+        }
+      </div>
+      }}
+    </div>
+  </div>
+  } @if(panel()==='zoom' && selected();as p){
+  <div class="zoom-content">
+    <div class="zoom-title">
+      <h2>{{p.name}}</h2>
+      <span>{{color()}} / {{views()[gallery()]}}</span>
+    </div>
+    <div
+      class="zoom-stage"
+      draggable="false"
+      (dragstart)="$event.preventDefault()"
+      (wheel)="wheel($event)"
+      (dblclick)="setZoom(zoom()===1?2:1)"
+      (pointerdown)="pointerDown($event)"
+      (pointermove)="pointerMove($event)"
+      (pointerup)="pointerUp($event)"
+      (pointercancel)="pointerUp($event)"
+    >
+      <div
+        class="zoom-photo product-photo"
+        [ngStyle]="store.image(p,color(),gallery())"
+        [style.transform]="'translate('+pan().x+'px,'+pan().y+'px) scale('+zoom()+')'"
+        role="img"
+        [attr.aria-label]="p.name+', imagen ampliada'"
+      ></div>
+    </div>
+    <div class="zoom-tools">
+      <button
+        class="icon-button"
+        (click)="nextView(-1)"
+        aria-label="Perspectiva anterior"
+      >
+        ←</button
+      ><button
+        class="icon-button"
+        (click)="setZoom(zoom()-.5)"
+        [disabled]="zoom()===1"
+        aria-label="Reducir zoom"
+      >
+        −</button
+      ><span>{{(zoom()*100).toFixed(0)}}%</span
+      ><button
+        class="icon-button"
+        (click)="setZoom(zoom()+.5)"
+        [disabled]="zoom()>=maxZoom()"
+        aria-label="Aumentar zoom"
+      >
+        +</button
+      ><button
+        class="icon-button"
+        (click)="setZoom(1)"
+        aria-label="Restablecer zoom"
+      >
+        <svg viewBox="0 0 24 24">
+          <path d="M3 11a9 9 0 1 1 2 7M3 4v7h7" />
+        </svg></button
+      ><button
+        class="icon-button"
+        (click)="nextView(1)"
+        aria-label="Perspectiva siguiente"
+      >
+        →
+      </button>
+    </div>
+    <p class="zoom-help">
+      Pellizca o usa + y −. Arrastra para inspeccionar. Doble clic para ampliar.
+    </p>
+  </div>
+  } @if(panel()==='size' && selected();as p){
+  <div class="legal-content">
+    <span class="eyebrow">ENCUENTRA TU AJUSTE</span>
+    <h2>Guía de tallas</h2>
+    <p class="legal-intro">
+      {{p.name}} · Medidas del fabricante para este modelo. No confundas talla de etiqueta con medida corporal.
+    </p>
+    <div class="measurement-grid">
+      @for(m of (p.category==='Chaquetas'?['Pecho: mide de axila a axila con la
+      prenda extendida.','Hombros: mide de costura a costura.','Largo: mide
+      desde el hombro hasta el bajo.','Manga: mide desde la costura del hombro
+      hasta el puño.']:p.category==='Calzado'?['Pie: mide desde el talón hasta
+      el dedo más largo.','Compara centímetros, no solo el número de
+      talla.','Confirma ancho y medida interior de la plantilla.']:['Compara la
+      medida con un accesorio que te quede bien.','En cinturones, mide desde la
+      hebilla hasta el agujero que utilizas.','Solicita la tabla de medidas del
+      modelo real.']);track m;let i=$index){
+      <div>
+        <span>0{{i+1}}</span>
+        <p>{{m}}</p>
+      </div>
+      }
+    </div>
+    @if(p.sizeChart.length){
+    <p>Medidas oficiales de la prenda extendida, convertidas a centímetros. Pecho es ancho plano, no contorno corporal. Compara con una chaqueta que te quede bien; las medidas pueden variar ligeramente.</p>
+    <div class="size-table-wrap"><table class="size-table"><thead><tr><th>Talla</th>@for(v of p.sizeChart[0].values;track v.label){<th>{{v.label}} (cm)</th>}</tr></thead><tbody>@for(row of p.sizeChart;track row.size){<tr><th>{{row.size}}</th>@for(v of row.values;track v.label){<td>{{v.cm}}</td>}</tr>}</tbody></table></div>
+    }@else{<p>{{p.dimensions}}</p>}
+    <a class="source-link" [href]="p.sourceUrl" target="_blank" rel="noopener noreferrer">Consultar tabla y recomendaciones del fabricante ↗</a>
+    <button class="button" (click)="panel.set('product')">
+      Volver a la pieza ←
+    </button>
+  </div>
+  } @if(panel()==='legal'){
+  <article class="legal-content">
+    <span class="eyebrow">COMPRA CON INFORMACIÓN</span>
+    <h2>{{legal[legalKey()].title}}</h2>
+    <p class="legal-intro">{{legal[legalKey()].intro}}</p>
+    @for(section of legal[legalKey()].sections;track section.title){
+    <section>
+      <h3>{{section.title}}</h3>
+      <p>{{section.body}}</p>
+    </section>
+    }@if(legalKey()==='privacy'){<button
+      class="button"
+      (click)="store.clearLocal();notify('Carrito y favoritos eliminados de este navegador.')"
+    >
+      <svg viewBox="0 0 24 24">
+        <path d="M4 6h16M6 6l1 15h10l1-15M9 6V3h6v3" /></svg
+      >Borrar mis datos locales</button
+    >}@if(legalKey()==='claims'){<a
+      class="button"
+      href="https://consumidor.gob.pe/libro-de-reclamaciones/"
+      target="_blank"
+      rel="noopener noreferrer"
+      >Orientación de Indecopi ↗</a
+    >}
+    <nav class="legal-nav" aria-label="Información comercial">
+      <button (click)="legalPage('privacy')">Privacidad</button
+      ><button (click)="legalPage('terms')">Condiciones</button
+      ><button (click)="legalPage('shipping')">Envíos</button
+      ><button (click)="legalPage('faq')">Ayuda</button><button (click)="legalPage('materials')">Materiales</button><button (click)="legalPage('returns')">Cambios</button>
+    </nav>
+  </article>
+  } @if(panel()==='care'){
+  <div class="care-content">
+    <span class="eyebrow">CUIDADO CON INTENCIÓN</span>
+    <h2>Cuida lo que<br />te acompaña.</h2>
+    <p>
+      El cuidado depende del acabado y del tipo de cuero. Confirma las
+      indicaciones de tu pieza al comprarla.
+    </p>
+    @for(tip of ['Retira el polvo con un paño suave y seco.','Evita el agua, el
+    calor directo y la exposición prolongada al sol.','Guarda tu pieza en un
+    lugar ventilado, sin comprimir su forma.','Prueba cualquier producto de
+    cuidado en una zona poco visible y sigue las indicaciones del
+    fabricante.'];track tip;let i=$index){
+    <div class="care-tip">
+      <span>0{{i+1}}</span>
+      <p>{{tip}}</p>
+    </div>
+    }<button class="button" (click)="legalPage('faq')">Abrir centro de ayuda <span>↗</span></button>
+  </div>
+  }
+</section>
+}
