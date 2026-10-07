@@ -31,11 +31,9 @@ export class ShopComponent {
   ];
   category = signal('Todas las piezas');
   query = signal('');
-  onlyFavorites = signal(false);
-  liveOnly = signal(false);
   sort = signal('Selección');
   sortOpen = signal(false);
-  panel = signal<'cart' | 'product' | 'care' | 'legal' | 'size' | 'zoom' | ''>(
+  panel = signal<'favorites' | 'cart' | 'product' | 'care' | 'legal' | 'size' | 'zoom' | ''>(
     '',
   );
   selected = signal<Product | null>(null);
@@ -57,8 +55,6 @@ export class ShopComponent {
       (p) =>
         (this.category() === 'Todas las piezas' ||
           p.category === this.category()) &&
-        (!this.onlyFavorites() || this.store.favorites().includes(p.id)) &&
-        (!this.liveOnly() || p.live) &&
         this.normalize(
           `${p.sku} ${p.name} ${p.brand} ${p.audience} ${p.category} ${p.colors.map((c) => c.name).join(' ')}`,
         ).includes(this.normalize(this.query())),
@@ -71,6 +67,8 @@ export class ShopComponent {
             : b.name.localeCompare(a.name),
         );
   });
+  savedProducts = computed(() => this.store.products.filter(p => this.store.favorites().includes(p.id)));
+  navigate() { this.mobileMenu.set(false); }
   private focusBefore: HTMLElement | null = null;
   private wasOpen = false;
   private timer: ReturnType<typeof setTimeout> | undefined;
@@ -123,27 +121,15 @@ export class ShopComponent {
   }
   explore(c = 'Todas las piezas') {
     this.category.set(c);
-    this.onlyFavorites.set(false);
-    this.liveOnly.set(false);
     this.query.set('');
     this.mobileMenu.set(false);
     document
       .getElementById('collection')
       ?.scrollIntoView({ behavior: 'smooth' });
-  }
-  live() {
-    this.explore();
-    this.liveOnly.set(true);
   }
   favorites() {
     this.mobileMenu.set(false);
-    this.onlyFavorites.set(!this.onlyFavorites());
-    this.liveOnly.set(false);
-    this.category.set('Todas las piezas');
-    this.query.set('');
-    document
-      .getElementById('collection')
-      ?.scrollIntoView({ behavior: 'smooth' });
+    this.panel.set('favorites');
   }
   open(p: Product) {
     this.mobileMenu.set(false);
@@ -171,7 +157,7 @@ export class ShopComponent {
     }
     this.lastAdded.set(`${p.name} · ${color}`);
     this.panel.set('cart');
-    this.notify(`${p.name} está en tu bolsa`);
+
   }
   close() {
     if (this.panel() === 'zoom' || this.panel() === 'size') {

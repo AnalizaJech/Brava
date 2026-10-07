@@ -29,7 +29,7 @@ BRAVA transforma un catálogo en una experiencia de compra asistida: encontrar u
 | Descubrir                                                          | Elegir                                                                        | Consultar                                                          |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------------------ |
 | 12 piezas, categorías, búsqueda por nombre o código BV y favoritos | Colores de fábrica, tallas originales y galerías independientes por variante | Bolsa persistente con variante exacta y solicitud de compra |
-| Selección para identificar productos durante un TikTok LIVE        | Zoom con rueda, controles, arrastre, doble clic y pellizco                    | Mensaje por artículo con BV, marca, opción de fábrica, SKU, talla y cantidad        |
+| Guardados independientes sin alterar categorías ni búsqueda        | Zoom con rueda, controles, arrastre, doble clic y pellizco                    | Mensaje por artículo con BV, marca, opción de fábrica, SKU, talla y cantidad        |
 | Menú móvil de pantalla completa y navbar fijo                      | Fichas oficiales, cuidados y tablas de Schott en centímetros                                           | Información sobre envíos en Perú por Olva o Shalom                 |
 
 <table><tr><td width="66%"><img src="docs/media/product-detail.webp" alt="Ficha de producto con galería, colores y tallas"></td><td width="34%"><img src="docs/media/mobile-menu.webp" alt="Menú de pantalla completa en móvil"></td></tr></table>
@@ -130,3 +130,7 @@ Confirmar inventario por lote, costo final, disponibilidad, tarifas, plazos y co
 ---
 
 Diseño e implementación de BRAVA · [Identidad visual](BRAND.md)
+
+## Diseño y navegación
+
+Inicio, Tienda y La esencia. Categorías solo en la tienda; guardados en un panel independiente; ayuda y políticas en el footer. Identidad de cuero, costuras y latón documentada en [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).

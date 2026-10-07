@@ -25,3 +25,7 @@
 Se verificaron el frontend y la preparación del mensaje; no se enviaron mensajes de compra ni se realizaron pagos o importaciones. El catálogo no acredita stock en Perú, plazo final, costo de importación, licencia de fotografía ni relación de distribuidor. Los precios finales siguen por cotizar y las condiciones comerciales pendientes se indican de forma transparente.
 
 La calculadora interna, excluida del build, mantiene los escenarios previamente comprobados: costo 100, margen 30%, tasa 18%, dos unidades y envío 20 → 168,57 con envío separado; 185,43 absorbiendo envío. Margen de 100% rechazado. Es una simulación, no una cotización ni determinación tributaria.
+
+## Rediseño de navegación
+
+Guardados conservan búsqueda y categoría. Persistencia, retirada y estado vacío comprobados. Menú móvil de tres enlaces sin filtros ni políticas. Navegador a 320, 390, 768 y 1440 px sin desbordamiento; confirmación de bolsa sin aviso duplicado. Capturas y GIF del README actualizados.
