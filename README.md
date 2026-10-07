@@ -18,7 +18,7 @@ Una experiencia de compra de cuero con estética editorial, variantes claras y a
 
 ## Una pieza. Todos sus detalles.
 
-BRAVA transforma un catálogo en una experiencia de compra asistida: encontrar una pieza, inspeccionarla desde diferentes ángulos, elegir color y talla y llevar una selección completa a WhatsApp. La interfaz utiliza una paleta espresso, marfil y cognac, tipografía editorial y controles personalizados.
+BRAVA transforma un catálogo en una experiencia de compra asistida: encontrar una pieza, inspeccionarla desde diferentes ángulos, elegir color y talla y llevar una selección completa a WhatsApp. La interfaz utiliza una paleta de cuero silla de montar, espresso, tiza y latón, tipografía editorial y controles personalizados.
 
 ![Demostración de producto, variantes, zoom y bolsa](docs/media/shopping-demo.gif)
 
@@ -60,6 +60,10 @@ Los archivos están en `public/images/products/{producto}/{color}-{vista}.webp`.
 Fichas consultadas el **7 de octubre de 2026**. País de venta y país de fabricación se distinguen: las chaquetas seleccionadas de Schott indican fabricación en USA; no se atribuye ese origen a los accesorios Portland. No se anuncian ventas aseguradas ni relación de distribución oficial. [Datos y atribución de las fotos](docs/catalog-sources.json).
 
 El centro de ayuda resuelve selección de tallas, materiales, cuidados, compras por encargo y envíos. WhatsApp se reserva para la solicitud comercial de la bolsa, organizada para identificar cada variante sin intercambiar mensajes sobre datos que ya están en la ficha.
+
+## Diseño y navegación
+
+Inicio, Tienda y La esencia. Categorías solo en la tienda; guardados en un panel independiente; ayuda y políticas en el footer. Identidad de cuero, costuras y latón documentada en [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
 
 ## Arquitectura
 
@@ -130,7 +134,3 @@ Confirmar inventario por lote, costo final, disponibilidad, tarifas, plazos y co
 ---
 
 Diseño e implementación de BRAVA · [Identidad visual](BRAND.md)
-
-## Diseño y navegación
-
-Inicio, Tienda y La esencia. Categorías solo en la tienda; guardados en un panel independiente; ayuda y políticas en el footer. Identidad de cuero, costuras y latón documentada en [DESIGN-SYSTEM.md](DESIGN-SYSTEM.md).
